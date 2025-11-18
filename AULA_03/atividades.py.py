@@ -42,3 +42,75 @@ if tempo_filiacao > 3 or valor_movimentado > 5000:
     print("Você tem direito ao benefício especial da cooperativa.")
 else:
     print("Você ainda não atende aos critérios para o benefício.")
+
+
+
+
+# ATIVIDADE 1 – Validação de Qualidade dos Dados (If / Elif / Else)
+# Enunciado:
+
+# Você está ajudando um analista de dados a validar informações recebidas em um arquivo.
+# O analista quer saber se um valor numérico fornecido pelo usuário é considerado:
+
+# Inválido
+
+# Baixo
+
+# Aceitável
+
+# Alto
+
+# A regra é:
+
+# Valores menores que 0 → “Valor inválido.”
+
+# Valores entre 0 e 50 → “Valor considerado BAIXO.”
+
+# Valores entre 51 e 200 → “Valor ACEITÁVEL.”
+
+# Valores acima de 200 → “Valor ALTO e pode indicar um erro no dado.”
+
+# Crie um programa que receba um número e mostre a mensagem correta.
+valor = float(input("Digite o valor numérico para verificação: "))
+
+if valor < 0:
+    print("Valor inválido.")
+elif valor <= 50:
+    print("Valor considerado BAIXO.")
+elif valor <= 200:
+    print("Valor ACEITÁVEL.")
+else:
+    print("Valor ALTO e pode indicar um erro no dado.")
+
+
+
+# ATIVIDADE 2 – Sistema de Frete com Mais Categorias (If / Elif / Else)
+# Enunciado:
+
+# Uma loja online aplica diferentes valores de frete conforme o total da compra.
+# As regras são:
+
+# Compras acima de R$ 500,00 → frete GRÁTIS
+
+# Compras entre R$ 300 e R$ 500 → frete R$ 10,00
+
+# Compras entre R$ 150 e R$ 299 → frete R$ 20,00
+
+# Compras entre R$ 80 e R$ 149 → frete R$ 30,00
+
+# Compras abaixo de R$ 80 → frete R$ 45,00
+
+# Crie um programa que receba o valor da compra e mostre qual frete deve ser aplicado.
+valor = float(input("Digite o valor total da compra: R$ "))
+
+if valor > 500:
+    print("Frete GRÁTIS.")
+elif valor >= 300:
+    print("Frete de R$ 10,00.")
+elif valor >= 150:
+    print("Frete de R$ 20,00.")
+elif valor >= 80:
+    print("Frete de R$ 30,00.")
+else:
+    print("Frete de R$ 45,00.")
+
