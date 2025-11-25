@@ -23,20 +23,6 @@ match codigo:
 
 
 # ATIVIDADE
-# Número positivo ou negativo
-num = float(input("Digite um número: "))
-# Verifica se o número é positivo, negativo ou zero
-match num:
-    case num if num > 0:
-        print(f"{num} é positivo")
-    case num if num < 0:
-        print(f"{num} é negativo")
-    case 0:
-        print(f"{num} Zero é positivo")
-
-
-
-# ATIVIDADE
 # Notas dos alunos
 n1 = float(input("Digite a nota 1: "))
 n2 = float(input("Digite a nota 2: "))
@@ -62,7 +48,7 @@ match media:
 # ATIVIDADE
 vl_compra = float(input("Informe o valor da compra: "))
 # forma_pagamento = int(input("Informe a forma de pagamento (1 - À vista, 2 - Parcelado): "))
-forma_pagamento = input("Informe a forma de pagamento (À vista, Débito, Crédito, Pix, Cheque): ").upper()
+forma_pagamento = input("Informe a forma de pagamento (À vista, Débito, Crédito, Pix, Cheque): ").upper().strip()
 
 match forma_pagamento:
     case "À VISTA":

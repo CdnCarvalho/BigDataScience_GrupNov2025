@@ -43,27 +43,27 @@ match codigo:
 
 
 # # Recebe o código de acesso digitado pelo usuário
-# codigo = int(input("Informe o código de acesso: "))
+codigo = int(input("Informe o código de acesso: "))
 
-# # Verifica a área correspondente com base no código usando match/case
-# match codigo:
-#     case 1:
-#         print("Acesso à Academia")
-#     case 2:
-#         print("Acesso à Piscina")
-#     case 3:
-#         print("Acesso à Cobertura VIP")
-#     case num if num == 4 or num == 5:
-#         print("Acesso ao Estacionamento")
-#     case num if 6 <= num <= 8:  # Maneira insentivada pela comunidade Python para realizar verificações em intervalos maiores. Neste caso, estamos verificando, se variável num está no intervalo entre 7 e 9.
-#         print("Acesso às Áreas Comuns")
-#     case 9:
-#         print("Acesso Técnico")
-#     case _:
-#         print("Acesso negado. Código inválido.")
+# Verifica a área correspondente com base no código usando match/case
+match codigo:
+    case 1:
+        print("Acesso à Academia")
+    case 2:
+        print("Acesso à Piscina")
+    case 3:
+        print("Acesso à Cobertura VIP")
+    case num if num == 4 or num == 5:
+        print("Acesso ao Estacionamento")
+    case num if 6 <= num <= 8:  # Maneira insentivada pela comunidade Python para realizar verificações em intervalos maiores. Neste caso, estamos verificando, se variável num está no intervalo entre 7 e 9.
+        print("Acesso às Áreas Comuns")
+    case 9:
+        print("Acesso Técnico")
+    case _:
+        print("Acesso negado. Código inválido.")
 
 # --------------------------------------------------------
-# Exemplo 2
+###### Exemplo 2
 # Classificando idade
 idade = int(input("Digite a idade: "))
 
@@ -77,7 +77,21 @@ match idade:
     case _:
         print("Idade inválida.")
 
-# Atividade 2
+
+###### ATIVIDADE 1
+# Número positivo ou negativo
+num = float(input("Digite um número: "))
+# Verifica se o número é positivo, negativo ou zero
+match num:
+    case num if num > 0:
+        print(f"{num} é positivo")
+    case num if num < 0:
+        print(f"{num} é negativo")
+    case 0:
+        print(f"{num} Zero é positivo")
+
+
+###### Atividade 2
 valor = float(input("Digite um valor de venda: "))
 
 match valor:
