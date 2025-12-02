@@ -12,6 +12,7 @@ while i <= 10:
 # Começamos com i = 1. Enquanto i for menor ou igual a 10, imprimimos i e somamos 1.
 # O laço pára quando i ultrapassa 10.
 
+
 # ------------------------------------------------------------------
 # Exercício 2 – Mensagem repetida
 # Enunciado: Exiba a mensagem "Estudando Python!" 5 vezes.
@@ -22,6 +23,7 @@ while contador < 5:
 
 # O while repete a mensagem, enquanto contador for menor que 5.
 # Usamos += 1, para ir somando até atingir 5 repetições.
+
 
 # ------------------------------------------------------------------
 # Exercício 3 – Tabuada personalizada
@@ -35,6 +37,7 @@ while i <= 10:
 # A lógica da tabuada é a mesma, apenas a estrutura de repetição muda.
 # O número digitado é multiplicado por i, que vai de 1 até 10.
 
+
 # ------------------------------------------------------------------
 # Exercício 4 – Coleta de dados
 # Enunciado: Peça o nome de 3 pessoas e mostre a lista.
@@ -46,6 +49,7 @@ while i <= 3:
 
 # Aqui controlamos a quantidade de repetições com i, começando de 1 até 3.
 # O nome da pessoa é exibido após cada entrada.
+
 
 # ------------------------------------------------------------------
 # Exercício 5 – Soma de valores
