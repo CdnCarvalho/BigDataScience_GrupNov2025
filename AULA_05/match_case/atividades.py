@@ -37,9 +37,9 @@ if optativa != -1 and optativa > n1 or optativa > n2:
 media = (n1 + n2) / 2
 
 match media:
-    case m if m > 6:
+    case m if m >= 6:
         print(f"Aluno Aprovado com média {media}")
-    case m if 3 <= m <= 6:
+    case m if 3 <= m < 6:
         print(f"Aluno em Recuperação com média {media}")
     case _:
         print(f"Aluno Reprovado com média {media}")
