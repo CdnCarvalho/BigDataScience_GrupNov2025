@@ -1,0 +1,185 @@
+# Guia Prático: Histórico, Reversão e Desfazimento no Git
+
+Este documento foi elaborado para **iniciantes em Git**, com explicações claras, linguagem acessível e foco em situações reais do dia a dia em aula e em projetos colaborativos.
+
+---
+
+## 1. Histórico de Commits
+
+### 1.1 `git log`
+
+Mostra o histórico de commits do repositório.
+
+```bash
+git log
+```
+
+Uso didático:
+
+* Ver quem alterou o projeto
+* Entender a sequência de mudanças
+
+Versão resumida (recomendada para iniciantes):
+
+```bash
+git log --oneline
+```
+
+---
+
+### 1.2 `git show`
+
+Exibe os detalhes de um commit específico.
+
+```bash
+git show <hash-do-commit>
+```
+
+Mostra:
+
+* Autor
+* Data
+* Mensagem
+* Alterações feitas
+
+---
+
+## 2. Revertendo Commits (Forma Segura)
+
+### 2.1 `git revert`
+
+Usado para **desfazer um commit criando um novo commit**.
+
+```bash
+git revert <hash-do-commit>
+```
+
+✔️ Indicado para commits que **já foram enviados com `git push`**
+✔️ Mantém o histórico intacto
+
+---
+
+### 2.2 Tela do Editor (Vim)
+
+Ao executar `git revert`, o Git abre o editor **Vim** para confirmar a mensagem do novo commit.
+
+Mensagem padrão:
+
+```
+Revert "mensagem do commit original"
+```
+
+---
+
+### 2.3 Como editar no Vim
+
+1. Pressione:
+
+```
+i
+```
+
+(Entra no modo de edição)
+
+2. Digite ou altere o texto
+
+3. Pressione:
+
+```
+ESC
+```
+
+(Sai do modo edição)
+
+4. Salve e saia:
+
+```
+:wq
+```
+
+Cancelar sem salvar:
+
+```
+:q!
+```
+
+---
+
+## 3. Desfazendo Alterações em Arquivos
+
+### 3.1 `git restore`
+
+Usado para **descartar alterações que ainda NÃO viraram commit**.
+
+```bash
+git restore nome_do_arquivo
+```
+
+Ou para todos os arquivos:
+
+```bash
+git restore .
+```
+
+Atua **antes do commit**
+Não funciona para commits já feitos
+
+---
+
+### 3.2 Diferença importante
+
+| Situação                          | Comando correto |
+| --------------------------------- | --------------- |
+| Alterei o arquivo e me arrependi  | `git restore`   |
+| Já fiz commit, mas quero desfazer | `git revert`    |
+
+---
+
+## 4. Visualizando Alterações
+
+### 4.1 `git status`
+
+Mostra o estado atual do repositório.
+
+```bash
+git status
+```
+
+Essencial para:
+
+* Saber o que foi modificado
+* Ver arquivos prontos para commit
+
+---
+
+### 4.2 `git diff`
+
+Mostra exatamente **o que mudou** nos arquivos.
+
+```bash
+git diff
+```
+
+Boa prática antes de:
+
+* Commitar
+* Restaurar arquivos
+
+---
+
+## 5. Boas Práticas para Iniciantes
+
+* Use `git status` com frequência
+* Veja as mudanças com `git diff`
+* Prefira `git revert` após o `push`
+* Evite `git reset --hard` em projetos compartilhados
+
+---
+
+## 6. Frase didática
+
+> "No Git, nada é apagado sem deixar rastro. O histórico é uma forma de segurança do projeto."
+
+---
+
+**Documento criado para apoio em aulas práticas de Git e GitHub.**
