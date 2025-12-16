@@ -1,16 +1,44 @@
+# Função para somar dois números
+def somar(a, b):
+    return a + b
+
+
+print("=== Soma de Pares de Números ===")
+
+# Loop para 3 repetições
+for i in range(3):
+    print(f"\n--- Operação {i+1} ---")
+
+    try:
+        n1 = float(input("Digite o primeiro número: "))
+        n2 = float(input("Digite o segundo número: "))
+
+    except ValueError:
+        print("Erro: informe apenas números.")
+    except KeyboardInterrupt:
+        print("\nOperação interrompida pelo usuário.")
+    else:
+        # Executa somente se NÃO ocorrer erro
+        resultado = somar(n1, n2)
+        print(f"Soma dos valores: {resultado}")
+
+    finally:
+        # Executa sempre, com erro ou sem erro
+        print("Operação finalizada.")
+
+
+
+# -------------------------------------------------- Soma apenas,
+#  se ambos os números forem pares
 def somar_pares(a, b):
-    # se algum número for ímpar, força um erro
     if a % 2 != 0 or b % 2 != 0:
-        # int("erro")  # gera ValueError automaticamente
-        print('Erro!!!: Não deve informar números ímpares!')
-        return 'Não calculado'
+        return "Não calculado: números ímpares informados"
     
     return a + b
 
 
-print("=== Soma de números Pares ===")
+print("=== Soma de números pares ===")
 
-# Leitura de 3 pares de números
 for i in range(3):
     print(f"\nPar {i+1}")
 
@@ -18,8 +46,14 @@ for i in range(3):
         n1 = int(input("Digite o primeiro número par: "))
         n2 = int(input("Digite o segundo número par: "))
 
-        resultado = somar_pares(n1, n2)
-        print(f"Soma do {i+1}º par : {resultado}")
-
     except ValueError:
-        print("Erro: apenas números PARES são permitidos.")
+        print("Erro: informe apenas números inteiros.")
+    except KeyboardInterrupt:
+        print("Erro: operação interrompida pelo usuário.")
+
+    else:
+        resultado = somar_pares(n1, n2)
+        print(f"Resultado do {i+1}º par: {resultado}")
+
+    finally:
+        print("Operação encerrada.")

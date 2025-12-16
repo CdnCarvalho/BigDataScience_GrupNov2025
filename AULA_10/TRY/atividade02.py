@@ -26,3 +26,5 @@ else:
 
 finally:
     print('Operação finalizada. Retire seu cartão.')
+
+print('\nPrograma encerrado.')

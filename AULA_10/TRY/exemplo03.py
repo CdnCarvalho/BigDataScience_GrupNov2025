@@ -29,6 +29,7 @@ def calcular_media():
         print("\nEncerrando a operação.")
         print("-" * 30)
 
+
 # --------------------------------------------------------
 # Programa principal
 # --------------------------------------------------------
@@ -37,3 +38,4 @@ print("  Cálculo da Média do Aluno")
 print(30 * "=")
 
 calcular_media()
+print("\nPrograma finalizado.")
