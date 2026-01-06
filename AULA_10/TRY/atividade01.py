@@ -3,7 +3,7 @@ def somar(a, b):
     return a + b
 
 
-print("=== Soma de Pares de Números ===")
+print("=== Soma os Números ===")
 
 # Loop para 3 repetições
 for i in range(3):
@@ -25,6 +25,8 @@ for i in range(3):
     finally:
         # Executa sempre, com erro ou sem erro
         print("Operação finalizada.")
+
+print("\nPrograma encerrado.")
 
 
 
