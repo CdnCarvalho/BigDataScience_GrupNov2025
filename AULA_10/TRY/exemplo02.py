@@ -70,7 +70,7 @@ while True:
     lst_vendas.append(valor)
     venda += 1
 
-    resposta = input('Quer continuar? [s/n]: ').lower()
+    resposta = input('Quer continuar? [s/n]: ')[0].lower()
 
     if resposta == 'n':
         break  # Comando break, interrompe o loop e sai do while

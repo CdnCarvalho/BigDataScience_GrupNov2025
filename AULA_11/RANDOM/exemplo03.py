@@ -1,9 +1,8 @@
 import random
-import os
 
 def gerar_numeros(ini, fin, qtd):
     lst_num = [random.randint(ini, fin) for i in range(qtd)]
-    # print("Números gerados:", lst_num)
+    print("Números gerados:", lst_num)
     return lst_num
 
 
@@ -28,7 +27,6 @@ def dividir(n1, n2):
 
 
 # ------------------------------------------------------------ PROGRAMA PRINCIPAL
-os.system('cls')
 lista = gerar_numeros(1, 10, 2)
 print("\nValores escolhidos para as operações:")
 print(f"Primeiro número: {lista[0]}")
@@ -47,9 +45,9 @@ print('4 - Dividir')
 # match case
 opcao = int(input('\nDigite a opção desejada: '))
 
-print()
 print(40*'=')
-print("Resultado da operação:")
+print("\nResultado da operação:")
+print(40*'=')
 
 match opcao:
     case 1:
@@ -63,6 +61,4 @@ match opcao:
     case _:
         print("Opção inválida. Tente novamente.")
 
-print(40*'=')
-
-print('\nPrograma Encerrado!')
+print('Fim do programa.')

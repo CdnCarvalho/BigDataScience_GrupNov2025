@@ -1,7 +1,7 @@
 import random
 
 def gerar_numeros(ini, fin, qtd):
-    lst_num = [random.randint(ini, fin) for n in range(qtd)]
+    lst_num = [random.randint(ini, fin) for i in range(qtd)]
     print("Números gerados:", lst_num)
     return lst_num
 
@@ -26,7 +26,8 @@ def dividir(n1, n2):
     return n1 / n2
 
 
-# --------- INÍCIO DO CÓDIGO ---------
+# --------- PROGRAMA PRINCIPAL ---------
+
 lista = gerar_numeros(1, 10, 2)
 
 n1 = lista[0]

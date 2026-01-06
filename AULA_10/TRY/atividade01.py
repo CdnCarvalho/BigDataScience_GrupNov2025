@@ -26,7 +26,7 @@ for i in range(3):
         # Executa sempre, com erro ou sem erro
         print("Operação finalizada.")
 
-print("\nPrograma encerrado.")
+print("\nPrograma encerrado."git )
 
 
 
