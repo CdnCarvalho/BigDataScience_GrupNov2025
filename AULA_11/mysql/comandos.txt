@@ -1,0 +1,46 @@
+Conectar-se ao MySQL e Habilitar o Local_Infile no Cliente:
+mysql --local_infile -u root -p
+
+Criando um Banco de Dados
+CREATE DATABASE meu_banco_de_dados;
+
+Definindo o banco a ser usado
+USE meu_banco_de_dados;
+
+Criar uma Tabela 
+CREATE TABLE minha_tabela (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    coluna1 VARCHAR(255),
+    coluna2 VARCHAR(255),
+    coluna3 INT
+    );
+
+Verificar o local do diretório permitido
+SHOW VARIABLES LIKE 'secure_file_priv'; 
+
+Verificar a permissão para permitir arquivos no MySQL
+SHOW VARIABLES LIKE 'local_infile';
+
+Habilitar a permissão para arquivos usando global
+SET GLOBAL local_infile=1;
+
+Inserindo o conteúdo do arquivo.csv na tabela
+LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\base4.csv' 
+INTO TABLE minha_tabela 
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n' 
+IGNORE 1 ROWS
+(coluna1, coluna2, coluna3);
+
+Mostrando o conteúdo da tabela
+SELECT * FROM minha_tabela;
+
+
+Para inserir
+INSERT INTO minha_tabela (coluna1, coluna2, coluna3) VALUES
+('Arroz (5 kg)', '25,00', 120),
+('Feijão (1 kg)', '10,00', 80),
+('Macarrão (500 g)', '5,00', 150),
+('Óleo de soja (900 ml)', '7,50', 70),
+('Açúcar (1 kg)', '4,00', 100),
+('Sal (1 kg)', '2,00', 200),

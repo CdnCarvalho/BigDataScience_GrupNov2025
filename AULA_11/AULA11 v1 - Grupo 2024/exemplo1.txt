@@ -1,0 +1,49 @@
+Chegamos ao nosso último encontro deste “UC”. Para finalizar iremos realizar a leitura de uma base de dados em MYSQL.
+
+Escolha um arquivo em “CSV” e realize a carga dos dados no banco MYSQL da máquina, como no exemplo abaixo:
+
+1. Preparar o Banco de Dados:
+o Certifique-se de que o MySQL está instalado e em execução.
+o Crie um banco de dados e uma tabela onde os dados do CSV serão inseridos. Por exemplo: 
+# Comandos SQL CREATE DATABASE meu_banco_de_dados; USE meu_banco_de_dados;
+
+
+CREATE TABLE minha_tabela ( id INT AUTO_INCREMENT PRIMARY KEY, coluna1 VARCHAR(255), coluna2 VARCHAR(255), coluna3 INT );
+
+2. Preparar o Arquivo CSV:
+	Certifique-se de que o arquivo exemplo.csv está formatado corretamente e que os dados correspondem às colunas da tabela no banco de dados.
+3. Carregar o Arquivo CSV Usando o MySQL:
+	Use o comando LOAD DATA INFILE para carregar os dados do CSV para a tabela. Por exemplo: 
+# Comandos SQL LOAD DATA INFILE 'caminho/para/exemplo.csv' INTO TABLE minha_tabela FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
+
+IGNORE 1 ROWS;
+o Nota: O caminho para o arquivo CSV deve ser acessível pelo servidor MySQL. Se estiver usando o MySQL localmente, pode ser necessário ajustar as permissões.
+4. Verificar os Dados:
+o Após o upload, verifique se os dados foram inseridos corretamente: SQL SELECT * FROM minha_tabela;
+
+Agora que temos a base de dados carregada, vamos realizar a conexão com o banco de dados MYSQL.
+
+Para ler dados de um banco de dados MySQL usando a biblioteca Pandas no Python, vamos precisar utilizar mais uma biblioteca SQLAlchemy para realizar a conexão:
+1. Instale as bibliotecas necessárias: 
+	pip install pandas sqlalchemy pymysql
+2. Conecte-se ao banco de dados MySQL: 
+	from sqlalchemy import create_engine
+
+	import pandas as pd 
+# Defina os parâmetros de conexão 
+	host = 'localhost' user = 'seu_usuario' password = 'sua_senha' database = 'nome_do_banco' 
+
+# Crie a engine de conexão 
+	engine = create_engine(f'mysql+pymysql://{user}:{password}@{host}/{database}') # Leia os dados da tabela para um DataFrame do Pandas df = pd.read_sql('nome_da_tabela', con=engine)
+
+Trabalhe com os dados: 
+Agora você pode manipular o DataFrame df como desejar, usando todas as funcionalidades do Pandas. Aqui está um exemplo completo: from sqlalchemy 		import create_engine
+	import pandas as pd 
+# Parâmetros de conexão host = 'localhost' user = 'root' password = 'mysql123' database = 'meu_banco' 
+
+# Criação da engine de conexão engine = create_engine(f'mysql+pymysql://{user}:{password}@{host}/{database}') 
+
+# Leitura dos dados da tabela 'clientes' para um DataFrame 
+	df = pd.read_sql('clientes', con=engine) 
+# Exibição dos dados 
+	print(df.head())
