@@ -36,16 +36,16 @@ print(df[df['Faturamento Total (R$)'] >= media])
 # Mostra os nomes dos produtos e preços
 print(df[['Produto', 'Preço por Unidade (R$)']].value_counts())
 
-# Quantas vezes cada valor aparece
+# Conta as vezes que cada valor aparece
 print(df['Preço por Unidade (R$)'].value_counts())
 
-# Retorna o nº que é a moda
+# Moda - Retorna quem é a Moda
 print(df['Preço por Unidade (R$)'].value_counts().index[0])  
 
 # Retorna o número de vezes que o valor mais frequente aparece
 print(df['Preço por Unidade (R$)'].value_counts().iloc[0])
 
-# Retorna o índice da moda e a moda
+# Moda com o índice
 print(df['Preço por Unidade (R$)'].mode())  
 
 # Mostra max, min, média, counts, desvio padrão std, quartis

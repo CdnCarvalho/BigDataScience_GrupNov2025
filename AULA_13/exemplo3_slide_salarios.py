@@ -4,7 +4,7 @@
 import numpy as np  
 
 # Lista de salários em uma moeda fictícia, representando uma pequena amostra de dados com um valor atípico (30000)
-dados_salario = [2000, 2500, 3000, 3500, 4000, 30000]
+dados_salario = [3000, 2500, 4000, 3500, 2000, 30000]
 
 # Calcula a média aritmética dos salários
 # A média é sensível a valores atípicos, então o valor alto (30000) influencia este cálculo
