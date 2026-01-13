@@ -25,9 +25,9 @@ print(df_planilha_custos[['Produto', 'Custo Total (R$)']].head())
 array_custo_total = np.array(df_planilha_custos['Custo Total (R$)'])
 
 # Calcula os quartis usando NumPy
-q1 = np.percentile(array_custo_total, 25)
-q2 = np.percentile(array_custo_total, 50)  # Mediana
-q3 = np.percentile(array_custo_total, 75)
+q1 = np.quantile(array_custo_total, 0.25)
+q2 = np.quantile(array_custo_total, 0.50)  # Mediana
+q3 = np.quantile(array_custo_total, 0.75)
 
 # Exibe os resultados
 print(f'\nPrimeiro quartil (Q1): {q1:.2f}')  # 25% dos produtos têm custo total até R$ 1.667,77
