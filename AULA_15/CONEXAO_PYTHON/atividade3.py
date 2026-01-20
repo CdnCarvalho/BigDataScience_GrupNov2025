@@ -1,34 +1,49 @@
+# EXEMPLO – Consulta de Clientes com Ensino Superior
 from sqlalchemy import create_engine, text
+import pandas as pd
 
-# Dados de conexão
+# Função para mostrar resultados
+def mostrar_resultados(resultados):
+    # Visualiza os resultados
+    for item in resultados:
+        print(
+            f"Nome: {item[0]} {item[1]}, "
+            f"Gênero: {item[2]}, "
+            f"Estado Civil: {item[3]}, "
+            f"Filhos: {item[4]}, "
+            f"Escolaridade: {item[5]}"
+        )
+
+# Função conecta
+def conecta_banco(query, host, user, password, database):
+    # URL de conexão com o banco
+    engine = create_engine(f'mysql+pymysql://{user}:{password}@{host}/{database}')
+
+    # Estabelece a conexão
+    with engine.connect() as conexao:
+        result = conexao.execute(text(query))
+        return result
+
+
+# --------------------------- Início do código principal ------------------
+# Variáveis de conexão
 host = 'localhost'
 user = 'root'
 password = '123456'
 database = 'bd_exemplo_aula_01'
 
-# Query para buscar produtos com estoque inferior a 2000
-query = "SELECT Pais, Produto, Porto, Quantidade FROM importados WHERE Quantidade < 500;"
+# Consulta SQL (os alunos trocarão apenas este trecho)
+consulta = """
+SELECT Primeiro_Nome, Sobrenome, Genero, Estado_Civil, Num_Filhos, Nivel_Escolar
+FROM cadastro_clientes
+WHERE Nivel_Escolar = 'Superior Completo'
+  AND Estado_Civil = 'C'
+  AND Num_Filhos > 2
+"""
 
-# Conectando ao banco de dados
-try:
-    engine = create_engine(f'mysql+pymysql://{user}:{password}@{host}/{database}')
-    conexao = engine.connect()
-    print("Conectado ao banco de dados com sucesso!")
+resultados = conecta_banco(consulta, host, user, password, database)
 
-    # Executando a consulta
-    resultados = conexao.execute(text(query))
+# df_clientes = pd.DataFrame(resultados.mappings().all())
+# print(df_clientes)
 
-    # Verificando os resultados
-    if resultados.rowcount > 0:
-        print("Produtos com estoque baixo:")
-        for resultado in resultados:
-            print(f"País: {resultado[0]}, Produto: {resultado[1]}, "
-                  f"Porto: {resultado[2]}, Estoque: {resultado[3]}")
-    else:
-        print("Nenhum produto com estoque baixo.")
-
-    # Fechando a conexão
-    conexao.close()
-
-except Exception as e:
-    print(f"Erro: {e}")
+mostrar_resultados(resultados)
