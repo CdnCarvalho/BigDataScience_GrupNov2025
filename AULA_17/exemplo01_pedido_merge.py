@@ -4,6 +4,18 @@
 # # Mostre o nome do cliente, cidade, data e valor de cada pedido realizado.
 # tb_pedidos.csv e clientes no MySQL
 
+# pip install python-dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv() # Carrega as variáveis no arquivo dot.env
+
+host = os.getenv('DB_HOST')
+user = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+database = os.getenv('DB_DATABASE')
+# -------------------------------------------------------------
+
 
 # Instalação:  pip install sqlalchemy pymysql pandas
 from sqlalchemy import create_engine
