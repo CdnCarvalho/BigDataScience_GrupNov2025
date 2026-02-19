@@ -1,39 +1,57 @@
-import pandas as pd 
+import pandas as pd
 import polars as pl
 import numpy as np
-from datetime import datetime
-import matplotlib.pyplot as plt
+import gc  #  Garbage Collector
 # pip install scipy
 from scipy.stats import kurtosis, skew 
+import matplotlib.pyplot as plt
+from datetime import datetime
 
-
-# ENDERECO_DADOS = '202501_NovoBolsaFamilia.csv'
-ENDERECO_DADOS = './../../Aula-12/POLARS/202501_NovoBolsaFamilia.csv'
+ENDERECO_DADOS = r'./dados/'
 
 try:
-
-    # Tempo de iníncial
+    print('Obtendo dados')
     inicio = datetime.now()
-    print('Carregando...')
 
-    # Pandas
-    # df_bolsa_familia = pd.read_csv(ENDERECO_DADOS, sep=';', encoding='iso-8859-1')
+    df_bolsa_familia = None    
+    lista_arquivos = ['202501_NovoBolsaFamilia.csv', '202502_NovoBolsaFamilia.csv']
 
-    # Polars
-    df_bolsa_familia = pl.read_csv(ENDERECO_DADOS, separator=';', encoding='iso-8859-1')
 
-    print(df_bolsa_familia.head())
+    for arquivo in lista_arquivos:
+        print(f'Processando arquivo {arquivo}')
 
-    # No Pandas
-    # print('Nomes das colunas:', df_bolsa_familia.columns.tolist())
+        # df = pd.read_csv(ENDERECO_DADOS + arquivo, sep=';', encoding='iso-8859-1') # PANDAS  
+       
+        df = pl.read_csv(ENDERECO_DADOS + arquivo, separator=';', encoding='iso-8859-1')  # POLARS
 
-    # Tempo final
+        # Concatenação dos dataframes
+        if df_bolsa_familia is None:
+            df_bolsa_familia = df
+        else:
+            df_bolsa_familia = pl.concat([df_bolsa_familia, df])
+
+        # Prints
+        print(df.head())
+        print(df.shape)  # Total de Colunas e Linhas
+        print(df.columns)  # Nomes das Colunas | Pandas .columns.tolist()
+        print(df.dtypes)  # Tipos das Colunas
+
+        # limpar df da memória
+        del df        
+        
+        # Coletar resíduos da memória, após variável deixar de existir na memória
+        gc.collect()
+
     fim = datetime.now()
-    print(f"Tempo de execução: {fim - inicio}")
-    
-except Exception as e:
-    print("Erro ao obter dados: ", e)
 
+    print('\nBolsa Família Concatenado')
+    print(df_bolsa_familia.head())
+    print(df_bolsa_familia.shape)
+
+    print(f'Tempo de execução: {fim - inicio}')
+
+except ImportError as e:
+    print(f'Erro ao importar os arquivos: {e}')
 
 
 try:
@@ -43,30 +61,15 @@ try:
         pl.col('VALOR PARCELA').str.replace(',','.').cast(pl.Float64)
     )
 
-    # # PANDAS
-    # # Converter a série VALOR PARCELA para float
-    # df_bolsa_familia['VALOR PARCELA'] = (
-    #     df_bolsa_familia['VALOR PARCELA'].str.replace(',', '.').astype(float)
-    # )
-
     # PRÉPROCESSAMENTO - TRANSFORMAÇÃO
     # delimitando as colunas para exibir: NOME MUNICÍPIO, VALOR PARCELA
     df_bolsa_familia = df_bolsa_familia[['NOME MUNICÍPIO', 'VALOR PARCELA']]
-
-    # PANDAS
-    # agrupar por município e somar o valor das parcelas
-    # df_bolsa_familia = df_bolsa_familia.groupby('NOME MUNICÍPIO', as_index=False)['VALOR PARCELA'].sum()
-    # # print(df_bolsa_familia.head(10))
 
     # PROCESSAMENTO - TRANSFORMAÇÃO
     # POLARS
     df_bolsa_familia = (
         df_bolsa_familia.group_by('NOME MUNICÍPIO').agg(pl.col('VALOR PARCELA').sum())
         )
-
-    # PANDAS
-    # Ordenar os municípios pelo valor total das parcelas em ordem decrescente
-    # df_bolsa_familia = df_bolsa_familia.sort_values(by='VALOR PARCELA', ascending=False)
 
     # PROCESSAMENTO - TRANSFORMAÇÃO (Pensar no pré-processamento como o esforço necessário para deixar os dados "utilizáveis" e "limpos".)
     # POLARS 
@@ -130,28 +133,6 @@ try:
     print(f'Limite Superior: {limite_superior:,.2f}')
 
 
-    # PANDAS
-    # ---------------- MAIORES (acima de Q3) ----------------
-    # df_maiores = df_bolsa_familia[
-    #     df_bolsa_familia['VALOR PARCELA'] > q3
-    # ].sort_values(by='VALOR PARCELA', ascending=False)
-
-    # print('\nMunicípios acima de Q3 (25% superiores)')
-    # print(30*'-')
-    # print(df_maiores)
-
-
-    # PANDAS
-    # ---------------- MENORES (abaixo de Q1) ----------------
-    # df_menores = df_bolsa_familia[
-    #     df_bolsa_familia['VALOR PARCELA'] < q1
-    # ].sort_values(by='VALOR PARCELA', ascending=True)
-
-    # print('\nMunicípios abaixo de Q1 (25% inferiores)')
-    # print(30*'-')
-    # print(df_menores)
-
-
 
     # POLARS
     # ---------------- MAIORES (acima de Q3) ----------------
@@ -175,17 +156,6 @@ try:
     print('\nMunicípios abaixo de Q1 (25% inferiores)')
     print(30*'-')
     print(df_menores)
-
-
-    # PANDAS
-    # ---------------- OUTLIERS ----------------
-    # df_outliers_superiores = df_bolsa_familia[
-    #     df_bolsa_familia['VALOR PARCELA'] > limite_superior
-    # ]
-
-    # df_outliers_inferiores = df_bolsa_familia[
-    #     df_bolsa_familia['VALOR PARCELA'] < limite_inferior
-    # ]
 
 
     # POLARS
@@ -248,6 +218,7 @@ try:
     #       municípios com valores excepcionalmente altos.  ""
     #   --- A cauda direita não é apenas longa. Ela é muito pesada 
     #   --- Existem valores absurdamente distantes do restante
+    
     # PANDAS
     # curtose_valor = df_bolsa_familia['VALOR PARCELA'].kurt()
 
@@ -348,9 +319,12 @@ try:
 
     plt.axis('off')
     plt.tight_layout()
-    plt.show()
-    
+
+    # Para não influenciar no tempo de fechar o gráfico
     fim = datetime.now()
     print(f"Tempo de execução: {fim - inicio}")
+
+    plt.show()
+
 except Exception as e:
     print("Erro ao gerar gráficos: ", e)

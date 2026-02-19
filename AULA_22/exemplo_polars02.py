@@ -9,6 +9,7 @@ from scipy.stats import kurtosis, skew
 
 # ENDERECO_DADOS = '202501_NovoBolsaFamilia.csv'
 ENDERECO_DADOS = './../../Aula-12/POLARS/202501_NovoBolsaFamilia.csv'
+ENDERECO_DADOS = r'./dados/202501_NovoBolsaFamilia.csv'
 
 try:
 
@@ -299,6 +300,35 @@ try:
     print(f"Tempo de execução: {hora_impressao - hora_import}")
 
     plt.show()
+
+except Exception as e:
+    print("Erro ao gerar gráficos: ", e)
+
+
+# Salvando os dados
+try:
+    df_bolsa_familia.write_csv("./dados_salvos/bolsa_familia_processado.csv")
+    df_outliers_superiores.write_csv("./dados_salvos/outliers_superiores.csv")
+    df_outliers_inferiores.write_csv("./dados_salvos/outliers_inferiores.csv")
+
+    # Salvando as medidas.
+    # Transformar em Dataframe e Exportar como csv
+    df_metricas = pl.DataFrame({
+        "media": [media],
+        "mediana": [mediana],
+        "q1": [q1],
+        "q3": [q3],
+        "iqr": [iqr],
+        "minimo": [minimo],
+        "maximo": [maximo],
+        "variancia": [variancia],
+        "desvio_padrao": [desvio_padrao],
+        "coef_variacao": [coef_variacao],
+        "assimetria": [assimetria],
+        "curtose": [curtose_valor]
+    })
+
+    df_metricas.write_csv("./dados_salvos/metricas_estatisticas.csv")
 
 except Exception as e:
     print("Erro ao gerar gráficos: ", e)
