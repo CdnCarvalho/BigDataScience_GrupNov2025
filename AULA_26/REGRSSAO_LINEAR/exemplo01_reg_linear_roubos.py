@@ -24,14 +24,15 @@ except ImportError as e:
     print('Erro ao obter dados: ', e)
     exit()
 
+
 # delimitar somente as variáveis solicitadas e totalizar
 try:
     print("inciando a delimitação das variáveis e a totalização...")
     
     df_veiculos = df_ocorrencias[['cisp', 'roubo_veiculo', 'recuperacao_veiculos']]
 
-    # totalizar o dataframe
-    df_total_veiculos = df_veiculos.groupby('cisp').sum(['roubo_veiculo', 'recuperacao_veiculos']).reset_index()
+    # Agrupar e totalizar os roubos e recuperações por CISP no pandas novo   
+    df_total_veiculos = df_veiculos.groupby('cisp', as_index=False)[['roubo_veiculo', 'recuperacao_veiculos']].sum()
     
     print(df_total_veiculos)
 
@@ -99,12 +100,16 @@ try:
 
     scaler = StandardScaler()
 
-    # Normalização dos dados de Roubo de Veículos (X)
-    # Usa-se o método fit_transform, para transformar os dados de treino
-    # em um escala de -1 a 1, onde a concentração será em torno de 0
-    # A média no fit_transform tende a ser próxima de zero
-    # Logo todos os dados estarão na mesma escala
-    # Calcula a média e o desvio padrão dos dados de X_train. Aplica a tranformação
+    # Normalização (padronização) dos dados de Roubo de Veículos (X)
+    # Usa-se o método fit_transform para padronizar os dados de treino.
+    # O StandardScaler transforma os dados para que:
+    # - a média fique próxima de 0
+    # - o desvio padrão fique próximo de 1
+    # Isso ajuda o algoritmo a trabalhar com variáveis na mesma escala.
+
+    # O método fit_transform calcula a média e o desvio padrão de X_train
+    # e aplica a transformação nos próprios dados de treino, gerenado de uma (1)
+    # matriz de 1 coluna e quantas linhas forem necessárias(-1)
     X_train = scaler.fit_transform(X_train.reshape(-1, 1))
 
     # Dados de teste (X_test)
@@ -236,7 +241,7 @@ try:
     plt.tight_layout()
     plt.show()
 
-except ImportError as e:
+except Exception as e:
     print("Erro ao avaliar o modelo: ", e)
     exit()
 

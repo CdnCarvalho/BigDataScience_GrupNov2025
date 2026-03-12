@@ -13,13 +13,16 @@ try:
 
     df_lesoes = df_ocorrencias[['cisp', 'lesao_corp_dolosa', 'lesao_corp_morte']]
 
-    df_total_lesoes = df_lesoes.groupby(['cisp']).sum(['lesao_corp_dolosa','lesao_corp_morte']).reset_index()
+    # df_total_lesoes = df_lesoes.groupby(['cisp']).sum(['lesao_corp_dolosa','lesao_corp_morte']).reset_index()
+    
+    # Agrupando por CISP e totalizando as lesões
+    df_total_lesoes = df_lesoes.groupby('cisp', as_index=False)[['lesao_corp_dolosa', 'lesao_corp_morte']].sum()
 
     print(df_total_lesoes.head())
 
     print('Dados obtidos com sucesso!')
 
-except ImportError as e:
+except Exception as e:
     print(f'Erro ao obter dados: {e}')
     exit()
 
@@ -37,9 +40,10 @@ try:
 
     print(f'Correlação: {correlacao}')
 
-except ImportError as e:
+except Exception as e:
     print(f'Erro ao calcular a correlação: {e}')
     exit()
+
 
 # Regressão linear Análise Preditiva
 try:
@@ -75,9 +79,10 @@ try:
     lesao_morte_pred = modelo.predict(array_lesao_dolosa_pred_scaled)
     print('Previsão de lesões com morte (próximos 3 meses): ', lesao_morte_pred)
 
-except ImportError as e:
+except Exception as e:
     print("Erro ao realizar a regressão linear: ", e)
     exit()
+
 
 # avaliação do modelo
 try:
@@ -127,6 +132,6 @@ try:
     plt.tight_layout()
     plt.show()
 
-except ImportError as e:
+except Exception as e:
     print("Erro ao avaliar o modelo: ", e)
     exit()

@@ -11,7 +11,6 @@ try:
     # Diretamente do arquivo
     # df_ocorrecias = pd.read_csv('BaseDPEvolucaoMensalCisp.csv', sep=';', encoding='iso-8859-1')
     
-    # utf-8, iso-8859-1, latin1, cp1252
     # encodings principais: https://docs.python.org/3/library/codecs.html#standard-encodings
     df_ocorrencias = pd.read_csv(ENDERECO_DADOS, sep=';', encoding='iso-8859-1')
     

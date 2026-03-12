@@ -15,7 +15,7 @@ try:
     # demilitando somente as variáveis
     df_lesoes = df_ocorrencias[['cisp', 'lesao_corp_dolosa', 'lesao_corp_morte']]
 
-    # Totalizar
+    # Agrupando por CISP e totalizando as lesões
     df_total_lesoes = df_lesoes.groupby('cisp', as_index=False)[['lesao_corp_dolosa', 'lesao_corp_morte']].sum()
 
     print(df_total_lesoes.head())
