@@ -1,0 +1,6 @@
+CREATE TABLE tb_clientes (
+	codigo INT AUTO_INCREMENT PRIMARY KEY,
+    	nome VARCHAR(100),
+    	idade INT,
+    	telefone VARCHAR(20)
+);
